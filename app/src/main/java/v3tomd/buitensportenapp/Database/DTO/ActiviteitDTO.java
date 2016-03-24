@@ -1,6 +1,7 @@
 package v3tomd.buitensportenapp.Database.DTO;
 
 import v3tomd.buitensportenapp.Model.Activiteit;
+import v3tomd.buitensportenapp.Model.Gebruiker;
 
 /**
  * Created by Martijn on 22-3-2016.
@@ -23,6 +24,9 @@ public class ActiviteitDTO {
 
 
     public boolean AddActiviteit(Activiteit MyActiviteit){
+
+
+        Gebruiker curGebruiker = Gebruiker.GetGebruiker();
 
 
         //gelukt
