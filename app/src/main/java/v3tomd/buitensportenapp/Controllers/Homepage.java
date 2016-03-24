@@ -8,7 +8,7 @@ import v3tomd.buitensportenapp.R;
 /**
  * Created by Martijn on 22-3-2016.
  */
-public class Homepage extends Activity {
+public class HomePage extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

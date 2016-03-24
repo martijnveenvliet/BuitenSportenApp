@@ -13,12 +13,12 @@ import v3tomd.buitensportenapp.Model.Locatie;
 /**
  * Created by Martijn on 24-3-2016.
  */
-public class Activiteit_Aanmaken extends Activity {
+public class ActiviteitAanmaken extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_loginpage);
+//        setContentView(R.layout.activity_login);
     }
 
     private void MaakActiviteit(View v){
