@@ -31,7 +31,7 @@ public class Loginpage extends AppCompatActivity {
 
 
     private void LoginMetFacebook(View v){
-        Boolean bLoginSucceeded = Gebruiker.FacebookLogin("", "");
+        Boolean bLoginSucceeded = Gebruiker.FacebookLogin();
 
         if(bLoginSucceeded){
             Intent newIntent = new Intent(this, Homepage.class);
