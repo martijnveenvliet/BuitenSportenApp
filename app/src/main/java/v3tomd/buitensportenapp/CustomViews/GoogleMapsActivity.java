@@ -210,6 +210,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             MyActiviteit = Activiteiten.get(i);
 
             mMap.addMarker(new MarkerOptions().position(MyActiviteit.getLocatie().getLatLng()).title(MyActiviteit.getTitel()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
             //Julien: Hier kan je de points aanpassen
 
 

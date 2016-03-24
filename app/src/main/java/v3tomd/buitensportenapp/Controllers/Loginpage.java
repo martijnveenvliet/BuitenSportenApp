@@ -80,7 +80,10 @@ public class LoginPage extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+       if(Gebruiker.Login(email, password)){
+           Intent intent = new Intent(this, HomePage.class);
+            startActivity(intent);
+       }
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
