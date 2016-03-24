@@ -17,12 +17,24 @@ public class Activiteit {
     private Locatie MyLocatie;
 
 
-    public Activiteit(int ID, String Titel, eSportType SportType, Date Date,  int MinLeeftijd, int MaxLeeftijg, Locatie myLocatie) {
-
+    public Activiteit(int ID, String Titel, eSportType SportType, Date Date,  int MinLeeftijd, int MaxLeeftijd, Locatie Locatie) {
+        MyID= ID;
+        MyTitel = Titel;
+        MySportType = SportType;
+        MyDate = Date;
+        MyMinLeeftijd = MinLeeftijd;
+        MyMaxLeeftijd = MaxLeeftijd;
+        MyLocatie = Locatie;
     }
 
-    public Activiteit(String Titel, eSportType SportType, Date Date,  int MinLeeftijd, int MaxLeeftijg, Locatie myLocatie){
+    public Activiteit(String Titel, eSportType SportType, Date Date,  int MinLeeftijd, int MaxLeeftijd, Locatie Locatie){
         MyID = -1;
+        MyTitel = Titel;
+        MySportType = SportType;
+        MyDate = Date;
+        MyMinLeeftijd = MinLeeftijd;
+        MyMaxLeeftijd = MaxLeeftijd;
+        MyLocatie = Locatie;
     }
 
 

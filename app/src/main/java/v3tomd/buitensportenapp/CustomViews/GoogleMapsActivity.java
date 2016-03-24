@@ -7,14 +7,12 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -22,18 +20,24 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import v3tomd.buitensportenapp.R;
+import java.util.ArrayList;
 
+import v3tomd.buitensportenapp.Database.DAO.ActiviteitDAO;
+import v3tomd.buitensportenapp.Model.Activiteit;
+import v3tomd.buitensportenapp.R;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
     private static final long MIN_TIME = 5000;
     private static final float MIN_DISTANCE = 20;
-    private static final float Zoom = 14;
+    private static final float Zoom = 15;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -193,7 +197,23 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,Zoom);
         }
 
+        setMarkers();
 
+
+    }
+
+    private void setMarkers(){
+        ArrayList<Activiteit> Activiteiten = ActiviteitDAO.getInstance().getAlleActiviteiten();
+        Activiteit MyActiviteit;
+
+        for (int i = 0; i < Activiteiten.size(); i++) {
+            MyActiviteit = Activiteiten.get(i);
+
+            mMap.addMarker(new MarkerOptions().position(MyActiviteit.getLocatie().getLatLng()).title(MyActiviteit.getTitel()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+            //Julien: Hier kan je de points aanpassen
+
+
+        }
     }
 
 

@@ -29,7 +29,7 @@ public class ActiviteitAanmaken extends Activity {
         Date Date = new Date();
         int MinLeeftijd = 1;
         int MaxLeeftijd = 99;
-        Locatie MyLocatie = new Locatie();
+        Locatie MyLocatie = new Locatie(52.103178, 5.105735);
 
         ActiviteitDTO.getInstance().AddActiviteit(new Activiteit(Titel, SportType, Date, MinLeeftijd, MaxLeeftijd, MyLocatie));
 
