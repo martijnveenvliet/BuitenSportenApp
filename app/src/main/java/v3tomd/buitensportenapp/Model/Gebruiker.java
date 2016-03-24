@@ -1,6 +1,7 @@
 package v3tomd.buitensportenapp.Model;
 
 import v3tomd.buitensportenapp.Database.DAO.GebruikerDAO;
+import v3tomd.buitensportenapp.Utils.FacebookConnector;
 
 /**
  * Created by Martijn on 24-3-2016.
@@ -15,6 +16,14 @@ public class Gebruiker {
 
 
         CurGebruiker = GebruikerDAO.getInstance().getGebruikerByUsername(Username);
+
+        return true;
+    }
+
+    public static boolean FacebookLogin(){
+
+
+        CurGebruiker = FacebookConnector.getInstance().getGebruiker();
 
         return true;
     }
