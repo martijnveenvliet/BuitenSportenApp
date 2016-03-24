@@ -31,8 +31,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     private GoogleMap mMap;
     private LocationManager locationManager;
-    private static final long MIN_TIME = 1;
-    private static final float MIN_DISTANCE = 1;
+    private static final long MIN_TIME = 5000;
+    private static final float MIN_DISTANCE = 20;
+    private static final float Zoom = 14;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -131,8 +132,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onLocationChanged(Location location) {
         Log.i("location", "onLocationChanged");
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        Log.i("onLocationChanged", "Latitude: " + location.getLatitude() + " Longitude: " + location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,Zoom);
         mMap.animateCamera(cameraUpdate);
         if (checkPermissions()) {
             locationManager.removeUpdates(this);
@@ -170,49 +172,29 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        Location MyLocation;
+
+
+        MyLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (MyLocation == null) {
+
+            MyLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            if (MyLocation != null) {
+                Log.i("onLocationChanged", "Latitude: " + MyLocation.getLatitude() + " Longitude: " + MyLocation.getLongitude());
+                LatLng latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, Zoom);
+            }
+        } else {
+            Log.i("onLocationChanged", "Latitude: " + MyLocation.getLatitude() + " Longitude: " + MyLocation.getLongitude());
+            LatLng latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,Zoom);
+        }
+
+
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "GoogleMaps Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://v3tomd.buitensportenapp.CustomViews/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "GoogleMaps Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://v3tomd.buitensportenapp.CustomViews/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
 }
