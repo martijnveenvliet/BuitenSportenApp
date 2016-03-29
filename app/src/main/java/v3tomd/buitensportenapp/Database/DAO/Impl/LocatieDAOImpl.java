@@ -1,7 +1,6 @@
 package v3tomd.buitensportenapp.Database.DAO.Impl;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import v3tomd.buitensportenapp.Database.DAO.Interfaces.LocatieDAO;
 import v3tomd.buitensportenapp.Model.Locatie;

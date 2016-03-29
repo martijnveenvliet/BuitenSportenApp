@@ -2,10 +2,12 @@ package v3tomd.buitensportenapp.Model;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
+
 /**
  * Created by Martijn on 22-3-2016.
  */
-public class Locatie {
+public class Locatie implements Serializable {
 
     private double MyLatitude;
     private double MyLongitude;

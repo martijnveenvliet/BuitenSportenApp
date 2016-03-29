@@ -3,6 +3,7 @@ package v3tomd.buitensportenapp.CustomViews;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -12,6 +13,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,22 +25,53 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import v3tomd.buitensportenapp.Controllers.ActiviteitBekijken;
 import v3tomd.buitensportenapp.Database.DAO.Impl.DAOFacade;
-import v3tomd.buitensportenapp.Database.DAO.Interfaces.ActiviteitDAO;
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.R;
 
-public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener{
+
+    class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+
+        private final View myContentsView;
+
+        MyInfoWindowAdapter() {
+            myContentsView = getLayoutInflater().inflate(R.layout.item_marker_details, null);
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return null;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+
+            //Julien: Hier worden de contents gezet.
+
+            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
+            tvTitle.setText(marker.getTitle());
+            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+            tvSnippet.setText(marker.getSnippet());
+
+                   return myContentsView;
+        }
+    }
 
     private GoogleMap mMap;
     private LocationManager locationManager;
     private static final long MIN_TIME = 5000;
     private static final float MIN_DISTANCE = 20;
     private static final float Zoom = 15;
+    private Marker MyLocationMarker;
+    private HashMap<Marker, Activiteit> MyMarkers;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -54,8 +88,13 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Log.i("Permissions", "perm: " + checkPermissions());
         if (checkPermissions()) {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            } else {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
+            }
         }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -97,7 +136,12 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
+
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    } else {
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
+                    }
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 
@@ -137,10 +181,19 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         Log.i("location", "onLocationChanged");
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         Log.i("onLocationChanged", "Latitude: " + location.getLatitude() + " Longitude: " + location.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,Zoom);
+
+        MyLocationMarker.remove();
+
+        MyLocationMarker = mMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title("You"));
+
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, Zoom);
         mMap.animateCamera(cameraUpdate);
         if (checkPermissions()) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+             }
             locationManager.removeUpdates(this);
         }
     }
@@ -172,11 +225,39 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+    private void GaNaarActiviteitBekijken(Activiteit MyActiviteit){
+        Intent intent = new Intent(this, ActiviteitBekijken.class);
+        intent.putExtra("activiteit", MyActiviteit);
+
+        startActivity(intent);
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        setMarkers();
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+
+                Activiteit theActiviteit = MyMarkers.get(marker);
+                Log.i("Marker details: ", "Ga naar de volgende activiteit!(" + theActiviteit.getTitel() + ")");
+                GaNaarActiviteitBekijken(theActiviteit);
+
+            }
+        });
+
+
+        mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
+
         Location MyLocation;
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
 
         MyLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (MyLocation == null) {
@@ -186,35 +267,46 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             if (MyLocation != null) {
                 Log.i("onLocationChanged", "Latitude: " + MyLocation.getLatitude() + " Longitude: " + MyLocation.getLongitude());
                 LatLng latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+                MyLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, Zoom);
             }
         } else {
             Log.i("onLocationChanged", "Latitude: " + MyLocation.getLatitude() + " Longitude: " + MyLocation.getLongitude());
             LatLng latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+            MyLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,Zoom);
         }
 
-        setMarkers();
+
 
 
     }
 
+
+
     private void setMarkers(){
         ArrayList<Activiteit> Activiteiten = DAOFacade.getInstance().getMyActiviteitDAO().getAllActivities();
+        MyMarkers = new HashMap<Marker, Activiteit>();
         Activiteit MyActiviteit;
+        Marker MyMarker;
 
         for (int i = 0; i < Activiteiten.size(); i++) {
             MyActiviteit = Activiteiten.get(i);
 
-            mMap.addMarker(new MarkerOptions().position(MyActiviteit.getLocatie().getLatLng()).title(MyActiviteit.getTitel()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+            MyMarker =  mMap.addMarker(new MarkerOptions()
+                    .position(MyActiviteit.getLocatie().getLatLng())
+                    .title(MyActiviteit.getTitel())
+                    .snippet(MyActiviteit.getMarkerText())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.bal)));
 
             //Julien: Hier kan je de points aanpassen
+
+            MyMarkers.put(MyMarker, MyActiviteit);
 
 
         }
     }
 
 
-}
+
+    }

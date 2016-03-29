@@ -1,12 +1,14 @@
 package v3tomd.buitensportenapp.Model;
 
+import java.io.Serializable;
+
 import v3tomd.buitensportenapp.Database.DAO.Impl.DAOFacade;
 import v3tomd.buitensportenapp.Utils.FacebookConnector;
 
 /**
  * Created by Martijn on 24-3-2016.
  */
-public class Gebruiker {
+public class Gebruiker implements Serializable{
 
 
 

@@ -1,11 +1,14 @@
 package v3tomd.buitensportenapp.Model;
 
+import android.util.Log;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Martijn on 22-3-2016.
  */
-public class Activiteit {
+public class Activiteit implements Serializable{
 
     private String MyTitel;
     private eSportType MySportType;
@@ -57,6 +60,21 @@ public class Activiteit {
         MySportType = mySportType;
     }
 
+    public String getSportTypeString(){
+        switch (MySportType){
+            case Voetbal:
+                return "Voetbal";
+            case Basketbal:
+                return "Basketbal";
+            case Hockey:
+                return "Hockey";
+            case Tennis:
+                return "Tennis";
+            default:
+                return "";
+        }
+    }
+
     public String getTitel() {
         return MyTitel;
     }
@@ -106,7 +124,16 @@ public class Activiteit {
     }
 
 
+public String getMarkerText(){
+    String sReturn = "";
 
+    sReturn = MyTitel + "\n" + getSportTypeString() + "\nDeelnemers: " + MyAantalDeelnemers + "\nMin/Max leeftijd: " + MyMinLeeftijd+"/"+MyMaxLeeftijd;
+
+    sReturn += "\n\nKlik hier voor meer informatie.";
+
+    Log.i("getMarkerText: " , sReturn);
+    return sReturn;
+}
 }
 
 

@@ -2,7 +2,6 @@ package v3tomd.buitensportenapp.Database.DAO.Impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import v3tomd.buitensportenapp.Database.DAO.Interfaces.ActiviteitDAO;
 import v3tomd.buitensportenapp.Model.Activiteit;
