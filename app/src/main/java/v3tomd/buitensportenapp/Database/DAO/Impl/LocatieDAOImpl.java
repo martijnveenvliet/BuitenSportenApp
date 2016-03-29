@@ -3,14 +3,14 @@ package v3tomd.buitensportenapp.Database.DAO.Impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import v3tomd.buitensportenapp.Database.DAO.LocatieDAO;
+import v3tomd.buitensportenapp.Database.DAO.Interfaces.LocatieDAO;
 import v3tomd.buitensportenapp.Model.Locatie;
 
 /**
  * Created by Vidjinder on 28-3-2016.
  */
-public class LocatieDAOImpl implements LocatieDAO {
-    List<Locatie> locaties;
+class LocatieDAOImpl implements LocatieDAO {
+    ArrayList<Locatie> locaties;
 
     public LocatieDAOImpl(){
         locaties = new ArrayList<Locatie>();
@@ -21,7 +21,7 @@ public class LocatieDAOImpl implements LocatieDAO {
     }
 
     @Override
-    public List<Locatie> getAllLocaties() {
+    public ArrayList<Locatie> getAllLocaties() {
         return locaties;
     }
 

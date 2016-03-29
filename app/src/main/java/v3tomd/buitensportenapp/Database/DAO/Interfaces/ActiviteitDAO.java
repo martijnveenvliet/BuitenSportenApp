@@ -1,11 +1,8 @@
-package v3tomd.buitensportenapp.Database.DAO;
+package v3tomd.buitensportenapp.Database.DAO.Interfaces;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import v3tomd.buitensportenapp.Model.Activiteit;
-import v3tomd.buitensportenapp.Model.Locatie;
 
 /**
  * Created by Martijn on 22-3-2016.
@@ -13,10 +10,11 @@ import v3tomd.buitensportenapp.Model.Locatie;
 
 public interface ActiviteitDAO{
 
-    public List<Activiteit> getAllActivities();
+    public ArrayList<Activiteit> getAllActivities();
     public Activiteit getActiviteit(int myID);
     public void updateActiviteit(Activiteit activiteit);
     public void deleteActiviteit(Activiteit activiteit);
+
 }
 
 /*public class ActiviteitDAO {

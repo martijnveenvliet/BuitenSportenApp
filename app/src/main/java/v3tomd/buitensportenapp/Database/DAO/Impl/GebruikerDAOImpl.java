@@ -1,15 +1,15 @@
 package v3tomd.buitensportenapp.Database.DAO.Impl;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import v3tomd.buitensportenapp.Database.DAO.GebruikerDAO;
+import v3tomd.buitensportenapp.Database.DAO.Interfaces.GebruikerDAO;
 import v3tomd.buitensportenapp.Model.Gebruiker;
 
 /**
  * Created by Vidjinder on 27-3-2016.
  */
-public class GebruikerDAOImpl implements GebruikerDAO{
-    List<Gebruiker> gebruikers;
+class GebruikerDAOImpl implements GebruikerDAO{
+    ArrayList<Gebruiker> gebruikers;
 
     public GebruikerDAOImpl(){
 
@@ -17,7 +17,7 @@ public class GebruikerDAOImpl implements GebruikerDAO{
     }
 
     @Override
-    public List<Gebruiker> getAllGebruikers() {
+    public ArrayList<Gebruiker> getAllGebruikers() {
         return gebruikers;
     }
 
@@ -37,6 +37,12 @@ public class GebruikerDAOImpl implements GebruikerDAO{
     public void deleteGebruiker(Gebruiker gebruiker) {
        gebruikers.remove(gebruiker.GetGebruiker());
         System.out.println("Gebruiker: " + gebruiker.GetGebruiker() + ", deleted from database");
+    }
+
+
+    public Gebruiker getGebruikerByUsername(String username){
+
+        return null;
     }
 }
 

@@ -1,6 +1,6 @@
-package v3tomd.buitensportenapp.Database.DAO;
+package v3tomd.buitensportenapp.Database.DAO.Interfaces;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import v3tomd.buitensportenapp.Model.Gebruiker;
 
@@ -9,10 +9,11 @@ import v3tomd.buitensportenapp.Model.Gebruiker;
  */
 
 public interface GebruikerDAO {
-    public List<Gebruiker> getAllGebruikers();
+    public ArrayList<Gebruiker> getAllGebruikers();
     public Gebruiker getGebruiker(int gebruikerId);
     public void updateGebruiker(Gebruiker gebruiker);
     public void deleteGebruiker(Gebruiker gebruiker);
+    public Gebruiker getGebruikerByUsername(String Username);
 }
 
 /*public class GebruikerDAO {

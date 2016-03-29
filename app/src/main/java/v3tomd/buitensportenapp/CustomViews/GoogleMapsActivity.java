@@ -26,11 +26,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-import v3tomd.buitensportenapp.Database.DAO.ActiviteitDAO;
+import v3tomd.buitensportenapp.Database.DAO.Impl.DAOFacade;
+import v3tomd.buitensportenapp.Database.DAO.Interfaces.ActiviteitDAO;
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.R;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
@@ -178,7 +178,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         Location MyLocation;
 
-
         MyLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (MyLocation == null) {
 
@@ -203,7 +202,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void setMarkers(){
-        ArrayList<Activiteit> Activiteiten = ActiviteitDAO.getInstance().getAlleActiviteiten();
+        ArrayList<Activiteit> Activiteiten = DAOFacade.getInstance().getMyActiviteitDAO().getAllActivities();
         Activiteit MyActiviteit;
 
         for (int i = 0; i < Activiteiten.size(); i++) {

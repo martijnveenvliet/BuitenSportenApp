@@ -1,6 +1,6 @@
-package v3tomd.buitensportenapp.Database.DAO;
+package v3tomd.buitensportenapp.Database.DAO.Interfaces;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import v3tomd.buitensportenapp.Model.Locatie;
 
@@ -8,7 +8,7 @@ import v3tomd.buitensportenapp.Model.Locatie;
  * Created by Vidjinder on 28-3-2016.
  */
 public interface LocatieDAO {
-    public List<Locatie> getAllLocaties();
+    public ArrayList<Locatie> getAllLocaties();
     public Locatie getLocatie(int gebruikerId);
     public void updateLocatie(Locatie locatie);
     public void deleteLocatie(Locatie locatie);

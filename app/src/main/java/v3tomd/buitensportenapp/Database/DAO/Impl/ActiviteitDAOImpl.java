@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import v3tomd.buitensportenapp.Database.DAO.ActiviteitDAO;
+import v3tomd.buitensportenapp.Database.DAO.Interfaces.ActiviteitDAO;
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.Model.Locatie;
 
 /**
  * Created by Vidjinder on 28-3-2016.
  */
-public class ActiviteitDAOImpl implements ActiviteitDAO{
+class ActiviteitDAOImpl implements ActiviteitDAO{
 
 
-    List<Activiteit> activiteiten;
+    ArrayList<Activiteit> activiteiten;
 
     public ActiviteitDAOImpl(){
         activiteiten = new ArrayList<Activiteit>();
@@ -25,7 +25,7 @@ public class ActiviteitDAOImpl implements ActiviteitDAO{
         activiteiten.add(activiteit2);
     }
     @Override
-    public List<Activiteit> getAllActivities() {
+    public ArrayList<Activiteit> getAllActivities() {
         return activiteiten;
     }
 

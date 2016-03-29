@@ -1,6 +1,6 @@
 package v3tomd.buitensportenapp.Model;
 
-import v3tomd.buitensportenapp.Database.DAO.GebruikerDAO;
+import v3tomd.buitensportenapp.Database.DAO.Impl.DAOFacade;
 import v3tomd.buitensportenapp.Utils.FacebookConnector;
 
 /**
@@ -18,7 +18,7 @@ public class Gebruiker {
     public static boolean Login(String Username, String Password){
 
 
-        CurGebruiker = GebruikerDAO.getInstance().getGebruikerByUsername(Username);
+        CurGebruiker = DAOFacade.getInstance().getMyGebruikerDAO().getGebruikerByUsername(Username);
 
         return true;
     }
