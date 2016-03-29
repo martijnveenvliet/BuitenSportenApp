@@ -1,19 +1,23 @@
 package v3tomd.buitensportenapp.CustomViews;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -72,6 +76,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     private static final float Zoom = 15;
     private Marker MyLocationMarker;
     private HashMap<Marker, Activiteit> MyMarkers;
+    private Marker markerNewActiviteit;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -90,33 +95,72 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Log.i("Permissions", "perm: " + checkPermissions());
         if (checkPermissions()) {
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            } else {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
-            }
+
         }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        addButton();
+
+
     }
+
+    private void addButton() {
+        Button btnActiviteitAanmaken = new Button(this);
+        btnActiviteitAanmaken.setBackgroundResource(R.drawable.add);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ToDP(50), ToDP(50), Gravity.RIGHT);
+        params.setMargins(0, ToDP(10), ToDP(80), 0 );
+        addContentView(btnActiviteitAanmaken, params);
+
+        btnActiviteitAanmaken.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (markerNewActiviteit == null){
+                    markerNewActiviteit = mMap.addMarker(new MarkerOptions()
+                            .position(mMap.getCameraPosition().target)
+                            .draggable(true)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+
+                }
+            }
+
+        });
+
+        Button btnOpties = new Button(this);
+        btnOpties.setBackgroundResource(R.drawable.ic_setting_light);
+        params = new FrameLayout.LayoutParams(ToDP(50), ToDP(50), Gravity.RIGHT);
+        params.setMargins(0, ToDP(10), ToDP(10), 0 );
+        addContentView(btnOpties, params);
+
+        btnOpties.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private int ToDP(int pixels){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, getResources().getDisplayMetrics());
+    }
+
 
     public boolean checkPermissions() {
         Boolean bReturnFine = false;
         Boolean bReturnCoarse = false;
+
         if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
             bReturnFine = true;
         } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
+
         if (hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
             bReturnCoarse = true;
         } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
 
         if (bReturnCoarse && bReturnFine) {
@@ -127,21 +171,16 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 0: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                    } else {
                         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
-                    }
+
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 
@@ -154,8 +193,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                 return;
             }
             case 1: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
@@ -192,8 +230,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, Zoom);
         mMap.animateCamera(cameraUpdate);
         if (checkPermissions()) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-             }
             locationManager.removeUpdates(this);
         }
     }
@@ -210,9 +246,10 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onProviderDisabled(String provider) {
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     private boolean hasPermission(String perm) {
-        return (PackageManager.PERMISSION_GRANTED == checkSelfPermission(perm));
+        return (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(this,
+                perm));
     }
 
 
@@ -253,10 +290,8 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 
         Location MyLocation;
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
+        LatLng latLng;
+        CameraUpdate cameraUpdate;
 
         MyLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (MyLocation == null) {
@@ -264,17 +299,20 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             MyLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
             if (MyLocation != null) {
-                Log.i("onLocationChanged", "Latitude: " + MyLocation.getLatitude() + " Longitude: " + MyLocation.getLongitude());
-                LatLng latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
-                MyLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, Zoom);
+                //Netwerk locatie
+                latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
+            }else{
+                //Geen locatie beschikbaar -> Coordinaten van HU
+                latLng = new LatLng(52.103472, 5.105896);
             }
         } else {
-            Log.i("onLocationChanged", "Latitude: " + MyLocation.getLatitude() + " Longitude: " + MyLocation.getLongitude());
-            LatLng latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
-            MyLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,Zoom);
+            //GPS Locatie
+            latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
         }
+
+        MyLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+        cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, Zoom);
+        mMap.animateCamera(cameraUpdate);
     }
 
     private void setMarkers(){

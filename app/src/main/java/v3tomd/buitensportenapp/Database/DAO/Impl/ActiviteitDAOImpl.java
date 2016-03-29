@@ -17,11 +17,17 @@ class ActiviteitDAOImpl implements ActiviteitDAO{
 
     public ActiviteitDAOImpl(){
         activiteiten = new ArrayList<Activiteit>();
-        Locatie MyLocatie = new Locatie(52.103178, 5.105735);
-        Activiteit activiteit1 = new Activiteit("Voetbal", Activiteit.eSportType.Voetbal, new Date(), 1, 99,  MyLocatie);
-        Activiteit activiteit2 = new Activiteit("Basketbal", Activiteit.eSportType.Basketbal, new Date(), 1, 99,  MyLocatie);
+        Locatie locatie1 = new Locatie(52.102834, 5.108794);
+        Locatie locatie2 = new Locatie(52.097161, 5.111634);
+        Locatie locatie3 = new Locatie(52.102584, 5.100789);
+
+        Activiteit activiteit1 = new Activiteit("Trap die bal!", Activiteit.eSportType.Voetbal, new Date(), 1, 99,  locatie1);
+        Activiteit activiteit2 = new Activiteit("Win die Jordans", Activiteit.eSportType.Basketbal, new Date(), 1, 99,  locatie2);
+        Activiteit activiteit3 = new Activiteit("Hockey met een stockey!", Activiteit.eSportType.Hockey, new Date(), 1, 99,  locatie3);
+
         activiteiten.add(activiteit1);
         activiteiten.add(activiteit2);
+        activiteiten.add(activiteit3);
     }
     @Override
     public ArrayList<Activiteit> getAllActivities() {

@@ -63,7 +63,7 @@ public class HomePage extends AppCompatActivity {
     private List<ItemObject> getListItemData(){
         List<ItemObject> listViewItems = new ArrayList<ItemObject>();
 
-        listViewItems.add(new ItemObject("Activiteit aanmaken", R.drawable.one, GoogleMapsActivity.class));
+        listViewItems.add(new ItemObject("Kaart", R.drawable.maps, GoogleMapsActivity.class));
 //        listViewItems.add(new ItemObject("Ethane", R.drawable.two));
 //        listViewItems.add(new ItemObject("Alkyne", R.drawable.three));
 //        listViewItems.add(new ItemObject("Benzene", R.drawable.four));

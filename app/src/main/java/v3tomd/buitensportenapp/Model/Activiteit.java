@@ -127,7 +127,7 @@ public class Activiteit implements Serializable{
 public String getMarkerText(){
     String sReturn = "";
 
-    sReturn = MyTitel + "\n" + getSportTypeString() + "\nDeelnemers: " + MyAantalDeelnemers + "\nMin/Max leeftijd: " + MyMinLeeftijd+"/"+MyMaxLeeftijd;
+    sReturn = getSportTypeString() + "\nDeelnemers: " + MyAantalDeelnemers + "\nMin/Max leeftijd: " + MyMinLeeftijd+"/"+MyMaxLeeftijd;
 
     sReturn += "\n\nKlik hier voor meer informatie.";
 

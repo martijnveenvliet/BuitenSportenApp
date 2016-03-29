@@ -14,9 +14,14 @@ class LocatieDAOImpl implements LocatieDAO {
     public LocatieDAOImpl(){
         locaties = new ArrayList<Locatie>();
         Locatie locatie1 = new Locatie(52.103178, 5.105735);
-        Locatie locatie2 = new Locatie(52.102795, 5.108324);
+        Locatie locatie2 = new Locatie(52.102834, 5.108794);
+        Locatie locatie3 = new Locatie(52.097161, 5.111634);
+        Locatie locatie4 = new Locatie( 52.097161, 5.111634);
+
         locaties.add(locatie1);
         locaties.add(locatie2);
+        locaties.add(locatie3);
+        locaties.add(locatie4);
     }
 
     @Override
