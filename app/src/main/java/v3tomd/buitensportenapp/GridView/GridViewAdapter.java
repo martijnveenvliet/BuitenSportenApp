@@ -8,16 +8,15 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import v3tomd.buitensportenapp.Controllers.ItemObjects;
 import v3tomd.buitensportenapp.R;
 
 
 public class GridViewAdapter extends RecyclerView.Adapter<GridViewHolder> {
 
-    private List<ItemObjects> itemList;
+    private List<ItemObject> itemList;
     private Context context;
 
-    public GridViewAdapter(Context context, List<ItemObjects> itemList) {
+    public GridViewAdapter(Context context, List<ItemObject> itemList) {
         this.itemList = itemList;
         this.context = context;
     }
@@ -26,14 +25,14 @@ public class GridViewAdapter extends RecyclerView.Adapter<GridViewHolder> {
     public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_layout, null);
-        GridViewHolder gvl = new GridViewHolder(layoutView);
+        GridViewHolder gvl = new GridViewHolder(context, layoutView, itemList);
         return gvl;
     }
 
     @Override
     public void onBindViewHolder(GridViewHolder holder, int position) {
-        holder.countryName.setText(itemList.get(position).getName());
-        holder.countryPhoto.setImageResource(itemList.get(position).getPhoto());
+        holder.tvCountryName.setText(itemList.get(position).getName());
+        holder.ivCountryPhoto.setImageResource(itemList.get(position).getPhoto());
     }
 
     @Override

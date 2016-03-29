@@ -1,10 +1,8 @@
 package v3tomd.buitensportenapp.Controllers;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,20 +60,20 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void login() {
-        Log.d(TAG, "Login");
-
-        if (!validate()) {
-            onLoginFailed();
-            return;
-        }
-
-        _loginButton.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(LoginPage.this,
-                R.style.AppTheme);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authentificeren...");
-        progressDialog.show();
+//        Log.d(TAG, "Login");
+//
+//        if (!validate()) {
+//            onLoginFailed();
+//            return;
+//        }
+//
+//        _loginButton.setEnabled(false);
+//
+//        final ProgressDialog progressDialog = new ProgressDialog(LoginPage.this,
+//                R.style.AppTheme);
+//        progressDialog.setIndeterminate(true);
+//        progressDialog.setMessage("Authentificeren...");
+//        progressDialog.show();
 
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
@@ -85,15 +83,15 @@ public class LoginPage extends AppCompatActivity {
             startActivity(intent);
        }
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+//        new android.os.Handler().postDelayed(
+//                new Runnable() {
+//                    public void run() {
+//                        // On complete call either onLoginSuccess or onLoginFailed
+//                        onLoginSuccess();
+//                        // onLoginFailed();
+//                        progressDialog.dismiss();
+//                    }
+//                }, 3000);
     }
 
     @Override

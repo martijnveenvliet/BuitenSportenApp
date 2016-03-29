@@ -10,7 +10,9 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import v3tomd.buitensportenapp.CustomViews.GoogleMapsActivity;
 import v3tomd.buitensportenapp.GridView.GridViewAdapter;
+import v3tomd.buitensportenapp.GridView.ItemObject;
 import v3tomd.buitensportenapp.R;
 
 
@@ -29,7 +31,7 @@ public class HomePage extends AppCompatActivity {
         gaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
         recyclerView.setLayoutManager(gaggeredGridLayoutManager);
 
-        List<ItemObjects> gaggeredList = getListItemData();
+        List<ItemObject> gaggeredList = getListItemData();
 
         GridViewAdapter rcAdapter = new GridViewAdapter(HomePage.this, gaggeredList);
         recyclerView.setAdapter(rcAdapter);
@@ -58,21 +60,26 @@ public class HomePage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<ItemObjects> getListItemData(){
-        List<ItemObjects> listViewItems = new ArrayList<ItemObjects>();
-        listViewItems.add(new ItemObjects("Alkane", R.drawable.one));
-        listViewItems.add(new ItemObjects("Ethane", R.drawable.two));
-        listViewItems.add(new ItemObjects("Alkyne", R.drawable.three));
-        listViewItems.add(new ItemObjects("Benzene", R.drawable.four));
-        listViewItems.add(new ItemObjects("Amide", R.drawable.one));
-        listViewItems.add(new ItemObjects("Amino Acid", R.drawable.two));
-        listViewItems.add(new ItemObjects("Phenol", R.drawable.three));
-        listViewItems.add(new ItemObjects("Carbonxylic", R.drawable.four));
-        listViewItems.add(new ItemObjects("Nitril", R.drawable.one));
-        listViewItems.add(new ItemObjects("Ether", R.drawable.two));
-        listViewItems.add(new ItemObjects("Ester", R.drawable.three));
-        listViewItems.add(new ItemObjects("Alcohol", R.drawable.four));
+    private List<ItemObject> getListItemData(){
+        List<ItemObject> listViewItems = new ArrayList<ItemObject>();
+
+        listViewItems.add(new ItemObject("Activiteit aanmaken", R.drawable.one, GoogleMapsActivity.class));
+//        listViewItems.add(new ItemObject("Ethane", R.drawable.two));
+//        listViewItems.add(new ItemObject("Alkyne", R.drawable.three));
+//        listViewItems.add(new ItemObject("Benzene", R.drawable.four));
+//        listViewItems.add(new ItemObject("Amide", R.drawable.one));
+//        listViewItems.add(new ItemObject("Amino Acid", R.drawable.two));
+//        listViewItems.add(new ItemObject("Phenol", R.drawable.three));
+//        listViewItems.add(new ItemObject("Carbonxylic", R.drawable.four));
+//        listViewItems.add(new ItemObject("Nitril", R.drawable.one));
+//        listViewItems.add(new ItemObject("Ether", R.drawable.two));
+//        listViewItems.add(new ItemObject("Ester", R.drawable.three));
+//        listViewItems.add(new ItemObject("Alcohol", R.drawable.four));
 
         return listViewItems;
     }
+
+
+
+
 }

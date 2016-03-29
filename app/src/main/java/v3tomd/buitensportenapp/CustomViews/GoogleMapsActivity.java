@@ -61,7 +61,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
             tvSnippet.setText(marker.getSnippet());
 
-                   return myContentsView;
+            return myContentsView;
         }
     }
 
@@ -244,7 +244,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
 
                 Activiteit theActiviteit = MyMarkers.get(marker);
-                Log.i("Marker details: ", "Ga naar de volgende activiteit!(" + theActiviteit.getTitel() + ")");
                 GaNaarActiviteitBekijken(theActiviteit);
 
             }
@@ -276,13 +275,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             MyLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,Zoom);
         }
-
-
-
-
     }
-
-
 
     private void setMarkers(){
         ArrayList<Activiteit> Activiteiten = DAOFacade.getInstance().getMyActiviteitDAO().getAllActivities();
