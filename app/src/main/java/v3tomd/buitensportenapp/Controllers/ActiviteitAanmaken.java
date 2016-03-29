@@ -10,9 +10,6 @@ import v3tomd.buitensportenapp.Database.DTO.ActiviteitDTO;
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.Model.Locatie;
 
-/**
- * Created by Martijn on 24-3-2016.
- */
 public class ActiviteitAanmaken extends Activity {
 
     @Override
