@@ -9,7 +9,10 @@ import v3tomd.buitensportenapp.Utils.FacebookConnector;
 public class Gebruiker {
 
 
+
+
     private String MyNaam;
+    private int myID;
     private static Gebruiker CurGebruiker;
 
     public static boolean Login(String Username, String Password){
@@ -31,6 +34,17 @@ public class Gebruiker {
 
     public static Gebruiker GetGebruiker(){
         return CurGebruiker;
+    }
+
+    public int getMyID() {
+        return myID;
+    }
+    public String getMyNaam() {
+        return MyNaam;
+    }
+
+    public void setMyNaam(String myNaam) {
+        MyNaam = myNaam;
     }
 
 }

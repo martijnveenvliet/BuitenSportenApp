@@ -9,6 +9,7 @@ public class Locatie {
 
     private double MyLatitude;
     private double MyLongitude;
+    private int myID;
 
     public Locatie(double Latitude, double Longitude) {
         MyLatitude = Latitude;
@@ -30,6 +31,9 @@ public class Locatie {
         MyLongitude = myLongitude;
     }
 
+    public int getMyID() {
+        return myID;
+    }
 
     public LatLng getLatLng(){
         return new LatLng(MyLatitude, MyLongitude);

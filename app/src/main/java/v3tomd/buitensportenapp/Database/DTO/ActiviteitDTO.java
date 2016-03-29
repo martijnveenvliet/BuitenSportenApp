@@ -1,5 +1,7 @@
 package v3tomd.buitensportenapp.Database.DTO;
 
+import java.util.ArrayList;
+
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.Model.Gebruiker;
 
@@ -9,6 +11,7 @@ import v3tomd.buitensportenapp.Model.Gebruiker;
 public class ActiviteitDTO {
 
     private static ActiviteitDTO MyInstance;
+    private ArrayList<Activiteit> activiteiten = new ArrayList<Activiteit>();
 
     private ActiviteitDTO(){
 
@@ -26,14 +29,24 @@ public class ActiviteitDTO {
     public boolean AddActiviteit(Activiteit MyActiviteit){
 
 
-        Gebruiker curGebruiker = Gebruiker.GetGebruiker();
+       Gebruiker curGebruiker = Gebruiker.GetGebruiker();
 
 
-        //gelukt
-        return true;
+        if(curGebruiker.getMyNaam() != null) {
+            activiteiten.add(MyActiviteit);
+            //gelukt
+            return true;
+        }
+        else {
+            //mislukt return false;
+            return false;
+        }
 
+    }
 
-                //mislukt return false;
+    public void updateActiviteit(Activiteit activiteit) {
+        activiteiten.get(activiteit.getMyID()).setTitel(activiteit.getTitel());
+        System.out.println("Activiteit ID:  " + activiteit.getMyID() +", updated in the database");
     }
 
 }
