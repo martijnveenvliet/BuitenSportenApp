@@ -1,6 +1,9 @@
 package v3tomd.buitensportenapp.Utils;
 
 import java.sql.*;
+
+import v3tomd.buitensportenapp.Model.Activiteit;
+
 /**
  * Created by Vidjinder on 29-3-2016.
  */
@@ -70,4 +73,51 @@ public class DatabaseConnector {
             }//end finally try
         }//end try
     }
+
+    public static void addActiviteit(Activiteit activiteit){
+        Connection conn = null;
+        Statement stmt = null;
+        try{
+            //STEP 2: Register JDBC driver
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to a selected database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("Connected database successfully...");
+
+            //STEP 4: Execute a query
+            System.out.println("Inserting records into the table...");
+            stmt = conn.createStatement();
+
+            String sql = "INSERT INTO activiteit " +
+                    "VALUES ("+activiteit.getMyID()+","+ activiteit.getTitel()+","+activiteit.getSportTypeString()+","
+                    +activiteit.getDate()+","+activiteit.getMinLeeftijd()+","+activiteit.getMaxLeeftijd()+","+activiteit.getAantalDeelnemers()+","+activiteit.getLocatie()+")";
+            stmt.executeUpdate(sql);
+            System.out.println("Inserted records into the table...");
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    conn.close();
+            }catch(SQLException se){
+            }// do nothing
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+
+
+    }
+
 }

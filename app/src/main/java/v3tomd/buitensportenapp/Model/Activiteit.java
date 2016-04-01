@@ -20,13 +20,14 @@ public class Activiteit implements Serializable{
     private Locatie MyLocatie;
 
 
-    public Activiteit(int ID, String Titel, eSportType SportType, Date Date,  int MinLeeftijd, int MaxLeeftijd, Locatie Locatie) {
+    public Activiteit(int ID, String Titel, eSportType SportType, Date Date,  int MinLeeftijd, int MaxLeeftijd, int AantalDeelnemers,Locatie Locatie) {
         MyID= ID;
         MyTitel = Titel;
         MySportType = SportType;
         MyDate = Date;
         MyMinLeeftijd = MinLeeftijd;
         MyMaxLeeftijd = MaxLeeftijd;
+        MyAantalDeelnemers = AantalDeelnemers;
         MyLocatie = Locatie;
     }
 
@@ -39,6 +40,7 @@ public class Activiteit implements Serializable{
         MyMaxLeeftijd = MaxLeeftijd;
         MyLocatie = Locatie;
     }
+
 
 
     public enum eSportType{

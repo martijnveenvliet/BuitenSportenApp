@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.Model.Gebruiker;
+import v3tomd.buitensportenapp.Utils.DatabaseConnector;
 
 /**
  * Created by Martijn on 22-3-2016.
@@ -35,6 +36,8 @@ public class ActiviteitDTO {
         if(curGebruiker.getMyNaam() != null) {
             activiteiten.add(MyActiviteit);
             //gelukt
+            DatabaseConnector.addActiviteit(new Activiteit(MyActiviteit.getMyID(),MyActiviteit.getTitel(),MyActiviteit.getSportType(),
+                    MyActiviteit.getDate(),MyActiviteit.getMinLeeftijd(),MyActiviteit.getMaxLeeftijd(),MyActiviteit.getAantalDeelnemers(),MyActiviteit.getLocatie()));
             return true;
         }
         else {

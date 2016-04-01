@@ -9,6 +9,7 @@ import java.util.Date;
 import v3tomd.buitensportenapp.Database.DTO.ActiviteitDTO;
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.Model.Locatie;
+import v3tomd.buitensportenapp.Utils.DatabaseConnector;
 
 public class ActiviteitAanmaken extends Activity {
 
