@@ -19,8 +19,9 @@ public class ActiviteitAanmaken extends Activity {
        setContentView(R.layout.activity_activiteit_aanmaken);
     }
 
-    private void MaakActiviteit(View v){
+    private void maakActiviteit(View v){
 //        String Titel, eSportType SportType, Date Date,  int MinLeeftijd, int MaxLeeftijg, Locatie myLocatie
+
 
         String Titel = "";
         Activiteit.eSportType SportType = Activiteit.eSportType.Voetbal;

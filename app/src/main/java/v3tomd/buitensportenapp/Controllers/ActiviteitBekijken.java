@@ -2,7 +2,6 @@ package v3tomd.buitensportenapp.Controllers;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.R;
@@ -27,7 +26,7 @@ public class ActiviteitBekijken extends Activity {
 
     private void vulVelden(){
 
-        TextView tvTitle = (TextView) findViewById(R.id.tvTitel);
-        tvTitle.setText(MyActiviteit.getTitel());
+//        TextView tvTitle = (TextView) findViewById(R.id.);
+//        tvTitle.setText(MyActiviteit.getTitel());
     }
 }
