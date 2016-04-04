@@ -154,7 +154,7 @@ public class Activiteit implements Serializable {
 
     public String getMarkerText() {
         String sReturn = "";
-        SimpleDateFormat simpleDate =  new SimpleDateFormat("HH-mm");
+        SimpleDateFormat simpleDate =  new SimpleDateFormat("HH:mm");
 
         sReturn = simpleDate.format(getStartDate()) + " - " + simpleDate.format(getMyEndDate());
         sReturn += "\n" + getSportTypeString();

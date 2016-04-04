@@ -4,9 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Icon;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +19,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -104,7 +107,16 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         addButton();
 
+        addLogo();
 
+    }
+
+    private void addLogo(){
+//        ImageView logo = new ImageView(this);
+//        logo.setImageResource(R.drawable.logo);
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ToDP(50), ToDP(50), Gravity.LEFT);
+//        params.setMargins(0, ToDP(10), ToDP(80), 0);
+//        addContentView(logo, params);
     }
 
     private void addButton() {
@@ -124,12 +136,12 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
                     //Julien: Hier kan je de layout van de 'nieuwe' activiteit aanpassen
 
+                    btnActiviteitAanmaken.setBackgroundResource(R.drawable.save);
+
+                }else{
+                    Intent intent = new Intent(v.getContext(), ActiviteitAanmaken.class);
+                    startActivity(intent);
                 }
-                btnActiviteitAanmaken.setBackgroundResource(R.drawable.save);
-
-                Intent intent = new Intent(v.getContext(), ActiviteitAanmaken.class);
-                startActivity(intent);
-
             }
 
         });
