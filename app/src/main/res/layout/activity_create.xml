@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:transitionGroup="false">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="24dp">
+
+        <ImageView android:src="@drawable/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginLeft="-70dp" />
+
+        <!--  Name Label -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Sport"
+            android:id="@+id/sportId" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Begin datum"
+            android:id="@+id/beginDate" />
+
+        <DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="92dp"
+            android:id="@+id/datePicker"
+            android:spinnersShown="true"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Eind datum"
+            android:id="@+id/endDate" />
+
+        <DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="92dp"
+            android:id="@+id/datePicker2"
+            android:spinnersShown="true"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Begin tijd"
+            android:id="@+id/beginTime" />
+
+        <TimePicker
+            android:layout_width="wrap_content"
+            android:layout_height="98dp"
+            android:id="@+id/timePicker"
+            android:layoutMode="clipBounds"
+            android:timePickerMode="spinner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Eind tijd"
+            android:id="@+id/endTime" />
+
+        <TimePicker
+            android:layout_width="wrap_content"
+            android:layout_height="87dp"
+            android:id="@+id/timePicker2"
+            android:timePickerMode="spinner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Locatie"
+            android:id="@+id/locationId" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+            android:spinnerMode="dropdown" />
+
+        <!-- Email Label -->
+
+        <!-- Password Label -->
+
+        <!-- Create Button -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Aantal Spelers"
+            android:id="@+id/playersId" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:id="@+id/numberPicker"
+            android:orientation="vertical" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_create"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Maak Activiteit"/>
+
+    </LinearLayout>
+</ScrollView>
