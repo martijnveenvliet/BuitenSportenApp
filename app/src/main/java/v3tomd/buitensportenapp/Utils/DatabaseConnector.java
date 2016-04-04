@@ -92,7 +92,7 @@ public class DatabaseConnector {
 
             String sql = "INSERT INTO activiteit " +
                     "VALUES ("+activiteit.getMyID()+","+ activiteit.getTitel()+","+activiteit.getSportTypeString()+","
-                    +activiteit.getDate()+","+activiteit.getMinLeeftijd()+","+activiteit.getMaxLeeftijd()+","+activiteit.getAantalDeelnemers()+","+activiteit.getLocatie()+")";
+                    +activiteit.getStartDate() + "," + activiteit.getMyEndDate()+","+activiteit.getMinLeeftijd()+","+activiteit.getMaxLeeftijd()+","+activiteit.getAantalDeelnemers()+","+activiteit.getLocatie()+")";
             stmt.executeUpdate(sql);
             System.out.println("Inserted records into the table...");
 

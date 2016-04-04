@@ -9,14 +9,14 @@ import java.util.Date;
 import v3tomd.buitensportenapp.Database.DTO.ActiviteitDTO;
 import v3tomd.buitensportenapp.Model.Activiteit;
 import v3tomd.buitensportenapp.Model.Locatie;
-import v3tomd.buitensportenapp.Utils.DatabaseConnector;
+import v3tomd.buitensportenapp.R;
 
 public class ActiviteitAanmaken extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
+       setContentView(R.layout.activity_activiteit_aanmaken);
     }
 
     private void MaakActiviteit(View v){
@@ -24,12 +24,15 @@ public class ActiviteitAanmaken extends Activity {
 
         String Titel = "";
         Activiteit.eSportType SportType = Activiteit.eSportType.Voetbal;
-        Date Date = new Date();
+        Date StartDate = new Date();
+        Date EndDate = new Date(StartDate.getTime() + 1000 * 60  * 60);
         int MinLeeftijd = 1;
         int MaxLeeftijd = 99;
+        int AantalDeelnemers = 0;
+        int MaxAantalDeelnemers = 0;
         Locatie MyLocatie = new Locatie(52.103178, 5.105735);
 
-        ActiviteitDTO.getInstance().AddActiviteit(new Activiteit(Titel, SportType, Date, MinLeeftijd, MaxLeeftijd, MyLocatie));
+        ActiviteitDTO.getInstance().AddActiviteit(new Activiteit(Titel, SportType, StartDate, EndDate, MinLeeftijd, MaxLeeftijd,AantalDeelnemers, MaxAantalDeelnemers,  MyLocatie));
 
     }
 }

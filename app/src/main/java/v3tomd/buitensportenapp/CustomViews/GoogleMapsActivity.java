@@ -17,7 +17,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -35,6 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import v3tomd.buitensportenapp.Controllers.ActiviteitAanmaken;
 import v3tomd.buitensportenapp.Controllers.ActiviteitBekijken;
 import v3tomd.buitensportenapp.Database.DAO.Impl.DAOFacade;
 import v3tomd.buitensportenapp.Model.Activiteit;
@@ -108,7 +108,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void addButton() {
-        Button btnActiviteitAanmaken = new Button(this);
+        final Button btnActiviteitAanmaken = new Button(this);
         btnActiviteitAanmaken.setBackgroundResource(R.drawable.add);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ToDP(50), ToDP(50), Gravity.RIGHT);
         params.setMargins(0, ToDP(10), ToDP(80), 0 );
@@ -122,8 +122,14 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                             .position(mMap.getCameraPosition().target)
                             .draggable(true)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+                    //Julien: Hier kan je de layout van de 'nieuwe' activiteit aanpassen
 
                 }
+                btnActiviteitAanmaken.setBackgroundResource(R.drawable.save);
+
+                Intent intent = new Intent(v.getContext(), ActiviteitAanmaken.class);
+                startActivity(intent);
+
             }
 
         });
@@ -310,7 +316,12 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             latLng = new LatLng(MyLocation.getLatitude(), MyLocation.getLongitude());
         }
 
-        MyLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
+        MyLocationMarker = mMap.addMarker(
+                new MarkerOptions()
+                        .position(latLng)
+                        .title("You"));
+        //Julien: Hier kan je de layout van de 'you' - locatie aanpassen.
+
         cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, Zoom);
         mMap.animateCamera(cameraUpdate);
     }

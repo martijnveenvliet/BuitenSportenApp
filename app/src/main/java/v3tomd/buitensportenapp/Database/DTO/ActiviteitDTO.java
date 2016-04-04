@@ -37,7 +37,7 @@ public class ActiviteitDTO {
             activiteiten.add(MyActiviteit);
             //gelukt
             DatabaseConnector.addActiviteit(new Activiteit(MyActiviteit.getMyID(),MyActiviteit.getTitel(),MyActiviteit.getSportType(),
-                    MyActiviteit.getDate(),MyActiviteit.getMinLeeftijd(),MyActiviteit.getMaxLeeftijd(),MyActiviteit.getAantalDeelnemers(),MyActiviteit.getLocatie()));
+                    MyActiviteit.getStartDate(), MyActiviteit.getMyEndDate(), MyActiviteit.getMinLeeftijd(),MyActiviteit.getMaxLeeftijd(),MyActiviteit.getAantalDeelnemers(), MyActiviteit.getMyMaxAantalDeelnemers(),MyActiviteit.getLocatie()));
             return true;
         }
         else {
